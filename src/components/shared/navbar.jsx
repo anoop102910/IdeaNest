@@ -14,11 +14,12 @@ function Navbar() {
       <span className="text-3xl">IdeaNest</span>
       <ul className="flex items-center gap-x-5 max-sm:hidden ">
         {listItems.map(list => (
-          <li key={listItems.id}>
+          <li key={list.id}>
             <Link href={list.link}>{list.name}</Link>
           </li>
         ))}
       </ul>
+      <div></div>
     </div>
   );
 }

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "flowbite-react": "^0.8.0",
     "framer-motion": "^10.16.5",
     "next": "14.0.3",
     "next-auth": "^4.24.5",
@@ -19,6 +20,7 @@
     "react-dom": "^18",
     "react-icons": "^4.12.0",
     "react-intersection-observer": "^9.5.3",
+    "react-vertical-timeline-component": "^3.6.0",
     "sequelize": "^6.37.2"
   },
   "devDependencies": {

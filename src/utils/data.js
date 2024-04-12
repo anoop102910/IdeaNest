@@ -54,3 +54,38 @@ export const blogs = [
     tags: ["google", "tailwind", "nextjs"],
   },
 ];
+
+export const milestones = [
+  {
+    id: 1,
+    date: "2022",
+    title: "Secured funding for further expansion and product development",
+    description: "Secured funding for further expansion and product development",
+  },
+  {
+    id: 2,
+    date: "2020",
+    title: "Recognized as one of the fastest-growing companies in the tech sector",
+    description: "Recognized as one of the fastest-growing companies in the tech sector",
+  },
+  {
+    id: 3,
+    date: "2018",
+    title: "Achieved $10 million in annual revenue",
+    description: "Achieved $10 million in annual revenue",
+  },
+  {
+    id: 4,
+    date: "2015",
+    title: "Expanded operations to international markets",
+    description: "Expanded operations to international markets",
+  },
+  //   {
+  //     date: '2012',
+  //     description: 'Launched our flagship product, revolutionizing the industry',
+  //   },
+  //   {
+  //     date: '2010',
+  //     description: 'Company founded by John Doe and Jane Smith',
+  //   },
+];
