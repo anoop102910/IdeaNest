@@ -2,14 +2,15 @@
 
 import React from "react";
 
-function Button({ text, className, props }) {
+function Button({ text, className, props ,onClick,children}) {
   return (
     <>
       <button
         {...props}
+        onClick={onClick}
         className={`text-sm px-4 py-2 bg-violet-600 hover:bg-violet-800 rounded-md ${className}`}
       >
-        {text}
+        {children}
       </button>
     </>
   );

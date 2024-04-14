@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 function Home() {
+
   return (
     <div className="md:flex  justify-between items-center mt-10">
       <div className="md:w-[46%] relative">

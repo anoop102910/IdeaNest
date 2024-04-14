@@ -7,9 +7,9 @@ import { milestones } from "@/utils/data";
 
 export default function TimelineComp() {
   return (
-    <Timeline>
+    <Timeline >
       {milestones.map((milestone) => (
-        <Timeline.Item key={milestone.id}>
+        <Timeline.Item key={milestone.id} >
           <Timeline.Point />
           <Timeline.Content>
             <Timeline.Time className="text-slate-100">{milestone.date}</Timeline.Time>
