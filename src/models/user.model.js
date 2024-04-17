@@ -1,5 +1,5 @@
 import sequelize from "@/utils/db";
-import { DataTypes ,Model} from "sequelize";
+import { DataTypes, Model } from "sequelize";
 
 class User extends Model {}
 
@@ -23,6 +23,18 @@ User.init(
         isEmail: true,
       },
     },
+    gender: {
+      type: DataTypes.ENUM("male", "female", "other"),
+      allowNull: true,
+    },
+    bio: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    contact: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -39,9 +51,8 @@ User.init(
   {
     sequelize,
     modelName: "users",
-    underscored:true,
+    underscored: true,
   }
 );
 
-
-export default User
+export default User;

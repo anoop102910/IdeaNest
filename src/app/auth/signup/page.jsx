@@ -1,7 +1,9 @@
 "use client";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -19,9 +21,17 @@ function LoginForm() {
     }));
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    // Handle form submission logic here
+
+    try {
+      const response = await axios.post("/api/register", JSON.stringify(formData));
+      console.log(response);
+      toast.success("Sign in success");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data ? error.response.data : "Something went wrong");
+    }
     console.log("Form submitted:", formData);
   };
 

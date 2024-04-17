@@ -16,11 +16,11 @@ Comment.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    postId: {
+    blogId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    userId: {
+    authorId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -38,7 +38,7 @@ Comment.init(
 );
 
 Comment.belongsTo(User, {
-  foreignKey: "userId",
+  foreignKey: "authorId",
   as: "author",
   onDelete: "cascade",
   onUpdate: "no action",

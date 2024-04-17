@@ -1,11 +1,9 @@
 import React from "react";
-import { blogs } from "@/utils/data";
-import { fetchBlogBySlug } from "@/utils/api";
+import { fetchBlog } from "@/app/lib/data";
 
 
 async function BlogPage({ params }) {
-  const blog = await fetchBlogBySlug(params.slug);
-  console.log(blog);
+  const blog = await fetchBlog(params.slug);
 
   return (
     <div className="mt-10 ">

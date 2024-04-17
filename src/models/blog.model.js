@@ -16,6 +16,9 @@ Blog.init(
       type: DataTypes.TEXT,
       unique: true,
     },
+    previewImage: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -25,7 +28,7 @@ Blog.init(
       allowNull: false,
     },
     authorId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     publishedAt: {
@@ -48,14 +51,25 @@ Blog.beforeCreate(blog => {
   blog.slug = slugify(blog.title, {
     lower: true,
   });
-});
-
-Blog.beforeCreate(blog => {
   if (blog.tags) {
     blog.tags = blog.tags.split(" ").filter(Boolean);
   }
 });
 
-Blog.belongsTo(User, { foreignKey: "authorId" });
+Blog.beforeUpdate(blog => {
+  blog.slug = slugify(blog.title, {
+    lower: true,
+  });
+  if (blog.tags) {
+    blog.tags = blog.tags.split(" ").filter(Boolean);
+  }
+});
+
+Blog.belongsTo(User, {
+  foreignKey: "authorId",
+  as: "author",
+  onDelete: "cascade",
+  onUpdate: "no action",
+});
 
 export default Blog;
