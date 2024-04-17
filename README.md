@@ -1,44 +1,41 @@
-# AnimeHub
+# Blog Application README
 
-AnimeHub is a website dedicated to providing a seamless experience for anime enthusiasts. Explore a vast collection of your favorite anime series and movies, discover new releases, classics, and hidden gems all in one place.
-
-## Website Link
-[AnimeHub]( https://animehub-102910.vercel.app/)
+Welcome to the README file for our Blog Application! Below, you'll find information about the features, technologies used, and instructions for setting up and running the application.
 
 ## Features
-- **Extensive Collection:** Browse through a diverse range of anime content.
-- **Search and Discover:** Easily find your favorite anime or discover new ones using the search feature.
-- **Responsive Design:** Enjoy a responsive and user-friendly design for a seamless experience across devices.
 
-## Technologies Used
-- **Next.js:** React framework for building the website.
-- **React:** JavaScript library for building user interfaces.
-- **Tailwind CSS:** Utility-first CSS framework for styling.
-- **Vercel:** Deployment platform for hosting the website.
+### User Authentication
+- Utilizes NextAuth for user authentication, providing secure and seamless login/signup functionality.
 
-## Getting Started
-1. **Clone the Repository:**
-    ```bash
-    git clone https://github.com/your-username/animehub.git
-    ```
-2. **Install Dependencies:**
-    ```bash
-    cd animehub
-    npm install
-    ```
-3. **Run the Development Server:**
-    ```bash
-    npm run dev
-    ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+### CRUD Operations on Blog
+- Allows users to create, read, update, and delete their blog posts.
 
-4. **Build for Production:**
-    ```bash
-    npm run build
-    ```
+### Update Profile
+- Users can update their profile information, including username, bio, gender and profile picture.
 
-## Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests.
+### Admin Panel
+- Includes a comprehensive admin panel for managing users and blog posts for administrative tasks.
 
-## License
-This project is licensed under the [MIT License](LICENSE).
+### Search and Filter Blog
+- Provides search and filter functionality for users to easily find specific blog posts.
+
+### User Dashboard
+- Offers a user-friendly dashboard where users can manage their profile and delete their blog posts.
+
+### Like and Comment on Blog
+- Enables users to like and comment on blog posts, fostering engagement and interaction within the community.
+
+### View User Profiles
+- Allows users to view other users' profiles to discover their blog posts and engage with their content.
+
+### Server actions
+- Utilizes the latest Next js server action for updating the state.
+
+## Tech Stack
+
+- **Next.js:** A React framework for building server-side rendered and statically generated web applications.
+- **NextAuth:** An authentication library for Next.js, providing various authentication strategies and utilities.
+- **PostgreSQL:** A powerful open-source relational database management system.
+- **Sequelize:** An ORM (Object-Relational Mapping) for Node.js, simplifying database interactions with PostgreSQL.
+- **Joi:** A schema validation library for JavaScript, ensuring data integrity and security.
+
