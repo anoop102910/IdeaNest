@@ -145,7 +145,7 @@ function LoginForm() {
           </button>
           <div className="text-sm font-medium text-slate-200">
             Already have an account?{" "}
-            <Link href="/dashboard/signin" className="text-blue-700 hover:underline">
+            <Link href="/auth/signin" className="text-blue-700 hover:underline">
               Login
             </Link>
           </div>
