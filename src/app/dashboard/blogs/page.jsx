@@ -1,12 +1,17 @@
-import { fetchBlogs, fetchUserBlogs } from "@/app/lib/data";
+import { fetchUserBlogs, fetchUserByEmail } from "@/app/lib/data";
 import BlogRow from "./BlogRow";
 import SearchInput from "@/components/shared/search";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 const BlogList = async ({ searchParams }) => {
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
+  const session = await getServerSession();
+  
+  const user = await fetchUserByEmail(session.user.email);
 
-  const blogs = await fetchUserBlogs(4, 10, page, q);
+  const blogs = await fetchUserBlogs(user.id, 10, page, q);
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between text-center mb-6">

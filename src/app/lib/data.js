@@ -25,7 +25,6 @@ export const fetchUserBlogs = async (authorId, limit = 10, page = 1, q = "") => 
       limit: limit,
       offset: (page - 1) * limit,
     });
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -53,7 +52,6 @@ export const fetchBlogs = async (limit = 10, page = 1, q = "") => {
       limit: limit,
       offset: (page - 1) * limit,
     });
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -87,7 +85,6 @@ export const fetchUsers = async (limit = 10, page = 1, q = "") => {
       limit: limit,
       offset: (page - 1) * limit,
     });
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -110,6 +107,18 @@ export const fetchUser = async id => {
   try {
     const user = await User.findOne({
       where: { id },
+      attributes: ["id", "username", "email", "bio", "gender", "contact"],
+    });
+    return user;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+export const fetchUserByEmail = async email => {
+  try {
+    const user = await User.findOne({
+      where: { email },
       attributes: ["id", "username", "email", "bio", "gender", "contact"],
     });
     return user;

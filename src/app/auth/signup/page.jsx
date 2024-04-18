@@ -26,7 +26,6 @@ function LoginForm() {
 
     try {
       const response = await axios.post("/api/register", JSON.stringify(formData));
-      console.log(response);
       toast.success("Sign in success");
     } catch (error) {
       console.log(error);

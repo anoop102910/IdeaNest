@@ -16,9 +16,6 @@ Blog.init(
       type: DataTypes.TEXT,
       unique: true,
     },
-    previewImage: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -35,6 +32,9 @@ Blog.init(
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
+    },
+    image: {
+      type: DataTypes.STRING,
     },
     tags: {
       type: DataTypes.ARRAY(DataTypes.TEXT),

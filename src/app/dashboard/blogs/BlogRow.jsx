@@ -35,7 +35,7 @@ function BlogRow({ blog }) {
             Delete
           </button>
         </form>
-        <Link href={`/admin/blogs/edit/${blog.slug}`}>
+        <Link href={`/dashboard/blogs/update/${blog.slug}`}>
           <button class="font-medium bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded  ">
             Edit
           </button>

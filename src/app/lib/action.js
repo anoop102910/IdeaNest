@@ -1,10 +1,11 @@
 "use server";
 import Blog from "@/models/blog.model";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import joi from "joi";
 import slugify from "slugify";
 import User from "@/models/user.model";
+import fs from "fs"
 
 const blogSchema = joi.object({
   title: joi.string().required(),
@@ -18,7 +19,6 @@ export const deleteBlog = async formData => {
   const { id } = Object.fromEntries(formData);
   try {
     const response = await Blog.destroy({ where: { id } });
-    console.log(response);
     revalidateTag("blogs");
   } catch (error) {
     console.log(error);
@@ -30,7 +30,6 @@ export const deleteUser = async formData => {
   const { id } = Object.fromEntries(formData);
   try {
     const response = await User.destroy({ where: { id } });
-    console.log(response);
   } catch (error) {
     console.log(error);
     throw error;
@@ -39,7 +38,7 @@ export const deleteUser = async formData => {
 };
 
 export const updateBlog = async formData => {
-  const { id, title, content, tags, slug } = Object.fromEntries(formData);
+  const { id, title, content, tags, slug, pathname, image } = Object.fromEntries(formData);
   try {
     await Blog.update(
       { title, content, tags },
@@ -50,11 +49,12 @@ export const updateBlog = async formData => {
     throw error;
   }
   revalidateTag("blog");
-  redirect("/admin/blogs");
+  if (pathname) redirect("/dashboard/blogs");
+  else redirect("/admin/blogs");
 };
 
 export const createBlog = async formData => {
-  const { title, content, tags, authorId } = Object.fromEntries(formData);
+  const { title, content, tags, authorId, image } = Object.fromEntries(formData);
 
   const { error } = blogSchema.validate({ title, content, tags, authorId });
 
@@ -74,6 +74,7 @@ export const createBlog = async formData => {
     throw error;
   }
   revalidateTag("blogs");
+  redirect("/dashboard/blogs");
 };
 
 export const updateUser = async formData => {
@@ -92,17 +93,17 @@ export const updateUser = async formData => {
 };
 
 export const updateProfile = async formData => {
-    const { id, username, gender, bio } = Object.fromEntries(formData);
-    const update = {};
-    if (username) update.username = username;
-    if (gender) update.gender = gender;
-    if (bio) update.bio = bio;
-    try {
-      await User.update(update, { where: { id }, returning: true, individualHooks: true });
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-    revalidatePath('/dashboard/profile')
-    redirect('/dashboard')
-  };
+  const { id, username, gender, bio } = Object.fromEntries(formData);
+  const update = {};
+  if (username) update.username = username;
+  if (gender) update.gender = gender;
+  if (bio) update.bio = bio;
+  try {
+    await User.update(update, { where: { id }, returning: true, individualHooks: true });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+  revalidatePath("/dashboard/profile");
+  redirect("/dashboard");
+};

@@ -1,8 +1,12 @@
 import { updateProfile } from "@/app/lib/action";
-import { fetchUser } from "@/app/lib/data";
+import { fetchUser, fetchUserByEmail } from "@/app/lib/data";
+import { getServerSession } from "next-auth";
 
 async function NewUser({ params }) {
-  const user = await fetchUser(4);
+  const session = await  getServerSession();
+  const { id } = await fetchUserByEmail(session.user.email);
+  const user = await fetchUser(id);
+
   console.log(user);
   return (
     <div className="flex justify-between items-center w-full ">

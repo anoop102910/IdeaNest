@@ -1,6 +1,11 @@
+import { getServerSession } from "next-auth";
 import Dashboard from "./components/dashboard";
+import { redirect } from "next/navigation";
 
-function layout({ children }) {
+async function layout({ children }) {
+  const session = await getServerSession();
+  if (!session) redirect("/auth/signin");
+
   return (
     <div className="flex gap-4 relative ">
       <Dashboard />

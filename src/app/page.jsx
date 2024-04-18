@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
 
-function Home() {
+async function Home() {
 
   return (
-    <div className="md:flex  justify-between items-center mt-10">
+    <div className="md:flex items-center gap-10 mt-10">
       <div className="md:w-[46%] relative">
         <h1 className="text-5xl font-bold leading-[3.8rem] bg-title">
           Discover Coding: Unraveling the Digital Tapestry
@@ -17,7 +17,13 @@ function Home() {
           See our works
         </button>
       </div>
-      <Image className="animate-float w-[40%] rounded-md " width="1000" height="1000" src="/hero.png" alt="" />
+      <Image
+        className="animate-float  md:w-[45%] rounded-md "
+        width="1000"
+        height="1000"
+        src="/hero.png"
+        alt=""
+      />
     </div>
   );
 }

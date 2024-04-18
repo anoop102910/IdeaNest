@@ -1,18 +1,23 @@
+"use client";
 import Link from "next/link";
-import { SignOutButton } from "@clerk/nextjs";
-
+import Button from "../ui/button";
+import { signOut, useSession } from "next-auth/react";
 const listItems = [
   { id: 1, name: "Home", link: "/" },
   { id: 2, name: "About", link: "/about" },
   { id: 3, name: "Blogs", link: "/blogs" },
-  { id: 4, name: "Contact", link: "/contact" },
   { id: 5, name: "Dashboard", link: "/dashboard" },
 ];
 
-async function Navbar() {
+function Navbar() {
+  const session = useSession();
+
+  if (session.status === "loading") return <div>Loading..</div>;
+  const authenticated = session.status === "authenticated";
+
   return (
-    <div className="flex  py-6 justify-between items-center  z-10 bg-black">
-      <span className="text-2xl">{"IdeaNest"}</span>
+    <div className="flex  py-8 justify-between items-center">
+      <span className="text-3xl">{authenticated ? session.data.user.name : "IdeaNest"}</span>
       <ul className="flex items-center gap-x-5 max-sm:hidden ">
         {listItems.map(list => (
           <li key={list.id}>
@@ -21,7 +26,13 @@ async function Navbar() {
         ))}
       </ul>
       <div>
-        <SignOutButton />
+        {session.status !== "authenticated" ? (
+          <Link href={"/auth/signin"}>
+            <Button>{"Signin"}</Button>
+          </Link>
+        ) : (
+          <Button onClick={signOut}>{"Logout"}</Button>
+        )}
       </div>
     </div>
   );

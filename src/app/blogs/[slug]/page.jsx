@@ -1,9 +1,11 @@
-import React from "react";
 import { fetchBlog } from "@/app/lib/data";
+import { notFound } from "next/navigation";
 
 
 async function BlogPage({ params }) {
   const blog = await fetchBlog(params.slug);
+
+  if(!blog) return notFound();
 
   return (
     <div className="mt-10 ">
