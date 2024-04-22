@@ -19,7 +19,7 @@ export const fetchUserBlogs = async (authorId, limit = 10, page = 1, q = "") => 
 
     const response = await Blog.findAll({
       where: whereClause,
-      attributes: ["id", "title", "slug", "tags", "createdAt", "authorId"],
+      attributes: ["id", "title", "slug", "tags", "createdAt", "authorId", "description"],
       include: [{ model: User, attributes: ["id", "username"], as: "author" }],
       order: [["id", "DESC"]],
       limit: limit,
@@ -42,11 +42,10 @@ export const fetchBlogs = async (limit = 10, page = 1, q = "") => {
             ],
           }
         : {};
-    // const whereClause = q?.length!=0 ? { title: { [Op.iLike]: `%${q}%` } } : {}
 
     const response = await Blog.findAll({
       where: whereClause,
-      attributes: ["id", "title", "slug", "tags", "createdAt", "authorId"],
+      attributes: ["id", "title", "slug", "tags", "createdAt", "authorId", "description"],
       include: [{ model: User, attributes: ["id", "username"], as: "author" }],
       order: [["id", "DESC"]],
       limit: limit,
@@ -119,9 +118,9 @@ export const fetchUserByEmail = async email => {
   try {
     const user = await User.findOne({
       where: { email },
-      attributes: ["id", "username", "email", "bio", "gender", "contact"],
+      attributes: ["id", "username", "email", "bio", "gender", "contact", "role"],
     });
-    return user;
+    return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.log(error);
     throw error;

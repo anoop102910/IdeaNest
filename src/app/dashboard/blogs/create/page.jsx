@@ -1,5 +1,5 @@
-import { createBlog } from "@/app/lib/action";
-import { fetchUserByEmail } from "@/app/lib/data";
+import { createBlog } from "@/lib/action";
+import { fetchUserByEmail } from "@/lib/data";
 import { getServerSession } from "next-auth";
 
 async function NewBlog() {
@@ -35,6 +35,19 @@ async function NewBlog() {
               id="tags"
               className="bg-transparent border border-slate-300 text-slate-100  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-slate-400"
               placeholder="E.g. React Node Web-developement"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="description" className="block mb-2  font-medium text-slate-200">
+              Description
+            </label>
+            <input
+              type="description"
+              name="description"
+              id="description"
+              className="bg-transparent border border-slate-300 text-slate-100  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-slate-400"
+              placeholder="Write a description..."
               required
             />
           </div>

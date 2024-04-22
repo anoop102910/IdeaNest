@@ -22,11 +22,6 @@ const dashboardItems = [
     title: "Profile",
     link: "/admin/profile",
   },
-  {
-    icon: "uil:signin",
-    title: "Register",
-    link: "/admin/register",
-  },
 ];
 async function Dashboard({ className }) {
 

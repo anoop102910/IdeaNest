@@ -1,4 +1,4 @@
-import { fetchBlogCount, fetchCommentCount, fetchUserCount } from "../lib/data";
+import { fetchBlogCount, fetchCommentCount, fetchUserCount } from "../../lib/data";
 
 async function AdminPanel() {
   const [blogCount, userCount, commentCount] = await Promise.all([

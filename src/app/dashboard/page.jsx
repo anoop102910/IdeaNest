@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { fetchUserBlogCount, fetchUserByEmail, fetchUserCommentCount } from "../lib/data";
+import { fetchUserBlogCount, fetchUserByEmail, fetchUserCommentCount } from "../../lib/data";
 
 async function AdminPanel() {
   const session = await getServerSession();
@@ -11,12 +11,12 @@ async function AdminPanel() {
   ]);
 
   return (
-    <div className="flex justify-around flex-1 items-start gap-4 flex-wrap">
-      <div className="p-6 rounded-md flex-1 shadow-md text-center space-y-4 bg-slate-800">
+    <div className="flex justify-around flex-1 gap-4 flex-wrap items-start">
+      <div className="p-6 rounded-md flex-1 min-w-max shadow-md text-center space-y-4 bg-slate-800">
         <h2 className="text-4xl font-bold">{blogCount}</h2>
         <p className="text-xl font-bold">Total Blogs</p>
       </div>
-      <div className="p-6 rounded-md flex-1 shadow-md text-center space-y-4 bg-slate-800">
+      <div className="p-6 rounded-md flex-1 min-w-max shadow-md text-center space-y-4 bg-slate-800">
         <h2 className="text-4xl font-bold">{commentCount}</h2>
         <p className="text-xl font-bold">Total Comments</p>
       </div>

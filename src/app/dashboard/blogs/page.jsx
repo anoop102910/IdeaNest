@@ -1,4 +1,4 @@
-import { fetchUserBlogs, fetchUserByEmail } from "@/app/lib/data";
+import { fetchUserBlogs, fetchUserByEmail } from "@/lib/data";
 import BlogRow from "./BlogRow";
 import SearchInput from "@/components/shared/search";
 import { getServerSession } from "next-auth";

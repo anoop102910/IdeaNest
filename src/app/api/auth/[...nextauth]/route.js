@@ -1,9 +1,8 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import User from "@/models/user.model";
-import jwt from "jsonwebtoken";
+
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -12,46 +11,41 @@ const handler = NextAuth({
       async authorize(credentials) {
         try {
           const user = await User.findOne({ where: { email: credentials.email } });
+          console.log(user);
+          if (!user) throw new Error("User not found");
 
-          if (user) {
-            const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
+          const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
+          console.log(isPasswordCorrect);
+          if (!isPasswordCorrect) throw new Error("Wrong Credentials!");
 
-            if (isPasswordCorrect) {
-              const newUser = {
-                id: user.id,
-                email: user.email,
-                name: user.username,
-              };
-              return newUser;
-            } else {
-              throw new Error("Wrong Credentials!");
-            }
-          } else {
-            throw new Error("User not found!");
-          }
+          return {
+            id: user.id,
+            name: user.username,
+            email: user.email,
+            role: user.role,
+          };
         } catch (err) {
           throw new Error(err);
         }
       },
     }),
-
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
   ],
   pages: {
-    error: "/dashboard/login",
+    signIn: "/auth/signin",
+    error: "/error",
   },
   callbacks: {
-    async jwt({ token, session, user }) {
-      if (user) token.id = user.id;
-      token = {...token, user : session}
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+      }
       return token;
     },
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       if (token) {
         session.user.id = token.id;
+        session.user.role = token.role;
       }
       return session;
     },

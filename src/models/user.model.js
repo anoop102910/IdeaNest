@@ -47,6 +47,10 @@ User.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    role: {
+      type: DataTypes.ENUM("admin", "user"),
+      defaultValue: "user",
+    },
   },
   {
     sequelize,

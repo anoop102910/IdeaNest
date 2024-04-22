@@ -1,5 +1,5 @@
 import Avatar from "@/components/shared/avatar";
-import { deleteUser } from "@/app/lib/action";
+import { deleteUser } from "@/lib/action";
 import Link from "next/link";
 
 function UserRow({ user }) {
@@ -36,7 +36,7 @@ function UserRow({ user }) {
             Delete
           </button>
         </form>
-        <Link href={`/admin/users/edit/${user.id}`}>
+        <Link href={`/admin/users/update/${user.id}`}>
           <button class="font-medium bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded  ">
             Edit
           </button>

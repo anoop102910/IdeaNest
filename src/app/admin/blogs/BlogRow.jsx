@@ -1,5 +1,5 @@
 import Avatar from "@/components/shared/avatar";
-import { deleteBlog } from "@/app/lib/action";
+import { deleteBlog } from "@/lib/action";
 import Link from "next/link";
 
 function BlogRow({ blog }) {
@@ -36,11 +36,6 @@ function BlogRow({ blog }) {
             Delete
           </button>
         </form>
-        <Link href={`/admin/blogs/edit/${blog.slug}`}>
-          <button class="font-medium bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded  ">
-            Edit
-          </button>
-        </Link>
       </td>
     </tr>
   );

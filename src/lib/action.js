@@ -5,7 +5,8 @@ import { redirect, usePathname } from "next/navigation";
 import joi from "joi";
 import slugify from "slugify";
 import User from "@/models/user.model";
-import fs from "fs"
+import fs from "fs";
+import Comment from "@/models/comment.model";
 
 const blogSchema = joi.object({
   title: joi.string().required(),
@@ -13,6 +14,7 @@ const blogSchema = joi.object({
   image: joi.string().optional(),
   tags: joi.string().required(),
   authorId: joi.number().required(),
+  description: joi.string().required(),
 });
 
 export const deleteBlog = async formData => {
@@ -38,10 +40,11 @@ export const deleteUser = async formData => {
 };
 
 export const updateBlog = async formData => {
-  const { id, title, content, tags, slug, pathname, image } = Object.fromEntries(formData);
+  const { id, title, content, tags, slug, pathname, image, description } =
+    Object.fromEntries(formData);
   try {
     await Blog.update(
-      { title, content, tags },
+      { title, content, tags, description },
       { where: { id }, returning: true, individualHooks: true }
     );
   } catch (error) {
@@ -54,9 +57,9 @@ export const updateBlog = async formData => {
 };
 
 export const createBlog = async formData => {
-  const { title, content, tags, authorId, image } = Object.fromEntries(formData);
+  const { title, content, tags, authorId, image, description } = Object.fromEntries(formData);
 
-  const { error } = blogSchema.validate({ title, content, tags, authorId });
+  const { error } = blogSchema.validate({ title, content, tags, authorId, description });
 
   if (error) {
     const message = `Invalid request body: ${error.message}`;
@@ -68,7 +71,7 @@ export const createBlog = async formData => {
     if (blog) {
       throw new Error("Blog already exists");
     }
-    const response = await Blog.create({ title, content, tags, authorId });
+    const response = await Blog.create({ title, content, tags, authorId, description });
   } catch (error) {
     console.log(error);
     throw error;
@@ -78,11 +81,12 @@ export const createBlog = async formData => {
 };
 
 export const updateUser = async formData => {
-  const { id, username, gender, bio } = Object.fromEntries(formData);
+  const { id, username, gender, bio, role } = Object.fromEntries(formData);
   const update = {};
   if (username) update.username = username;
   if (gender) update.gender = gender;
   if (bio) update.bio = bio;
+  if (role) update.role = role;
   try {
     await User.update(update, { where: { id }, returning: true, individualHooks: true });
   } catch (error) {
@@ -106,4 +110,26 @@ export const updateProfile = async formData => {
   }
   revalidatePath("/dashboard/profile");
   redirect("/dashboard");
+};
+
+export const createComment = async formData => {
+  const { blogId, content } = Object.fromEntries(formData);
+  try {
+    const comment = await Comment.create({ blogId, content });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+  revalidatePath(`/blog/${blogId}`);
+};
+
+export const registerUserAsAdmin = async formData => {
+  const { username, password } = Object.fromEntries(formData);
+  try {
+    const user = await User.create({ username, password, role: "admin" });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+  revalidateTag("users");
 };

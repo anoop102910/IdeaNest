@@ -13,19 +13,14 @@ const dashboardItems = [
     link: "/dashboard/blogs",
   },
   {
-    icon: "line-md:account",
+    icon: "mdi:account-outline",
     title: "Profile",
     link: `/dashboard/profile`,
   },
   {
     icon: "tabler:brand-blogger",
     title: "New Blog",
-    link: "/dashboard/create-blog",
-  },
-  {
-    icon: "uil:signin",
-    title: "Register",
-    link: "/register",
+    link: "/dashboard/blogs/create",
   },
 ];
 async function Dashboard({ className }) {
@@ -33,7 +28,7 @@ async function Dashboard({ className }) {
     <aside
       aria-label="sidebar"
       aria-controls="default-sidebar"
-      className={`${className} bg-slate-800 font-urbanist h-[calc(100vh-100px)]  min-w-[240px] sticky px-4 shadow-md rounded-md `}
+      className={`${className} max-sm:hidden bg-slate-800 font-urbanist h-[calc(100vh-100px)]  min-w-[240px] sticky px-4 shadow-md rounded-md `}
     >
       <div className="wrapper pt-6">
         <ul>

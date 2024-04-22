@@ -1,4 +1,4 @@
-import { fetchBlogs } from "@/app/lib/data";
+import { fetchBlogs } from "@/lib/data";
 import BlogRow from "./BlogRow";
 import SearchInput from "./SearchInput";
 

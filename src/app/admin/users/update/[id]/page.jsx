@@ -1,5 +1,5 @@
-import { updateUser } from "@/app/lib/action";
-import { fetchUser } from "@/app/lib/data";
+import { updateUser } from "@/lib/action";
+import { fetchUser } from "@/lib/data";
 
 async function NewUser({ params }) {
   const user = await fetchUser(params.id);
@@ -23,6 +23,20 @@ async function NewUser({ params }) {
               defaultValue={user.username}
               required
             />
+          </div>
+          <div>
+            <label htmlFor="role" className="block mb-2  font-medium text-slate-200">
+              Role
+            </label>
+            <select
+              className="bg-transparent border bg-black border-slate-300 text-slate-100  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-slate-400"
+              name="role"
+              id=""
+            >
+              <option className="p-4 bg-green-400" value="">Select Role</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
           </div>
           <div className="flex items-start"></div>
           <button

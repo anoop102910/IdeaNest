@@ -6,7 +6,7 @@ async function Home() {
   return (
     <div className="md:flex items-center gap-10 mt-10">
       <div className="md:w-[46%] relative">
-        <h1 className="text-5xl font-bold leading-[3.8rem] bg-title">
+        <h1 className="text-4xl md:text-5xl font-bold leading-[3rem] md:leading-[3.8rem] bg-title">
           Discover Coding: Unraveling the Digital Tapestry
         </h1>
         <p className="text-sm mt-10">

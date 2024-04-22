@@ -4,13 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-
+import toast from "react-hot-toast";
+import LoadingButton from "@/components/shared/loadbtn";
 function LoginForm() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const session = useSession();
 
   if (session.status === "loading") return <div>Loading...</div>;
@@ -27,32 +29,22 @@ function LoginForm() {
     }));
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
+    setLoading(true);
     event.preventDefault();
-    signIn("credentials", formData);
-  };
-
-  const handleGoogleLogin = async e => {
-    e.preventDefault();
-    console.log("Google login clicked");
     try {
-      const response = await signIn("google");
-      console.log(response);
+      const res = await signIn("credentials", { ...formData, redirect: false });
+      if (!res.ok) throw new Error(res.error);
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      toast.error(error.message);
     }
   };
 
   if (session.status === "unauthenticated")
     return (
       <div className="flex justify-between items-center mt-6 w-full ">
-        {/*   <Image
-        className="animate-float w-[40%] rounded-md "
-        width="1000"
-        height="1000"
-        src="/hero.png"
-        alt=""
-      /> */}
         <div className="w-full  mx-auto max-w-sm p-4 bg-slate-900 border border-slate-800 rounded-lg shadow sm:p-6 md:p-8">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <h5 className="text-xl font-medium text-slate-200">Sign in to our platform</h5>
@@ -106,33 +98,9 @@ function LoginForm() {
                 Lost Password?
               </a>
             </div>
-            <button
-              type="submit"
-              className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            >
-              Login to your account
-            </button>
-            <button
-              type="button"
-              onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center mt-2 text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M20 12H4M12 4v16m8-8H4"
-                />
-              </svg>
-              Sign in with Google
-            </button>
+            <LoadingButton type={"submit"} loading={loading} onClick={handleSubmit}>
+              Login to your Account
+            </LoadingButton>
             <div className="text-sm font-medium text-slate-200">
               Not registered?{" "}
               <Link href="/auth/signup" className="text-blue-700 hover:underline">

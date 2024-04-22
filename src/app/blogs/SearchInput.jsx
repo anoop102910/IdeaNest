@@ -2,7 +2,7 @@
 import { useDebouncedCallback } from "use-debounce";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-function SearchInput() {
+function SearchInput({className}) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -20,7 +20,7 @@ function SearchInput() {
   return (
     <div>
       <input
-        className=" bg-inherit outline-none border border-slate-100 w-80   text-slate-100  rounded-md shadow-md "
+        className={` bg-inherit outline-none border border-slate-100 w-80   text-slate-100  rounded-md shadow-md ${className}} `}
         placeholder="Search..."
         type="search"
         onChange={handleSearch}

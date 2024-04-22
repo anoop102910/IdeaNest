@@ -1,4 +1,4 @@
-import { fetchUsers } from "@/app/lib/data";
+import { fetchUsers } from "@/lib/data";
 import UserRow from "./UserRow";
 import SearchInput from "../blogs/SearchInput";
 

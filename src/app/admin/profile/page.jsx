@@ -1,17 +1,19 @@
 import { updateProfile } from "@/lib/action";
-import { fetchUser, fetchUserByEmail } from "@/lib/data";
+import { fetchUser,fetchUserByEmail } from "@/lib/data";
 import { getServerSession } from "next-auth";
 
 async function NewUser({ params }) {
-  const session = await getServerSession();
+  const session = await  getServerSession();
   const { id } = await fetchUserByEmail(session.user.email);
   const user = await fetchUser(id);
+
+  console.log(user);
   return (
     <div className="flex justify-between items-center w-full ">
       <div className="w-full  mx-auto max-w-lg p-4  rounded-lg shadow sm:p-6 ">
         <form className="space-y-6" action={updateProfile}>
           <input type="hidden" name="id" value={user.id} />
-          <h5 className="text-3xl font-medium text-slate-200">Update Profile</h5>
+          <h5 className="text-3xl font-medium text-slate-200">Update User</h5>
           <div>
             <label htmlFor="username" className="block mb-2  font-medium text-slate-200">
               Username

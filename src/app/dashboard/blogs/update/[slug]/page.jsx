@@ -1,5 +1,5 @@
-import { updateBlog } from "@/app/lib/action";
-import { fetchBlog } from "@/app/lib/data";
+import { updateBlog } from "@/lib/action";
+import { fetchBlog } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 async function NewBlog({ params }) {
@@ -40,6 +40,20 @@ async function NewBlog({ params }) {
               className="bg-transparent border border-slate-300 text-slate-100  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-slate-400"
               placeholder="E.g. React Node Web-developement"
               defaultValue={blog.tags}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="description" className="block mb-2  font-medium text-slate-200">
+              Description
+            </label>
+            <input
+              type="description"
+              name="description"
+              id="description"
+              className="bg-transparent border border-slate-300 text-slate-100  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-slate-400"
+              placeholder="E.g. React Node Web-developement"
+              defaultValue={blog.description}
               required
             />
           </div>

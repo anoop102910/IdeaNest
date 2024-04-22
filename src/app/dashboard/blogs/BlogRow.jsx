@@ -1,12 +1,12 @@
 import Avatar from "@/components/shared/avatar";
-import { deleteBlog } from "@/app/lib/action";
+import { deleteBlog } from "@/lib/action";
 import Link from "next/link";
 
 function BlogRow({ blog }) {
   return (
     <tr
       key={blog.author.id}
-      class=" border-b bg-gray-800 text-slate-200 border-gray-700  hover:bg-gray-700"
+      class=" border-b bg-gray-800 text-slate-200 border-gray-700  hover:bg-gray-700 min-w-max"
     >
       <td class="w-4 p-4">
         <div class="flex items-center">

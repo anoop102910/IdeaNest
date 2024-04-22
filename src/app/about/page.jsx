@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import TimelineComp from "./timeline";
 
 function About() {
   return (
@@ -15,11 +14,12 @@ function About() {
             and informative guides tailored to cater to diverse interests and preferences.
           </p>
         </div>
-        <Image width={400} height={400} className="rounded-lg flex-1 w-max" src={"/about.png"}></Image>
-      </div>
-      <div className="mt-20">
-        <h1 className="text-5xl font-bold mb-10">Company History</h1>
-        {<TimelineComp />}
+        <Image
+          width={400}
+          height={400}
+          className="rounded-lg flex-1 w-full md:w-max"
+          src={"/about.png"}
+        ></Image>
       </div>
     </div>
   );
