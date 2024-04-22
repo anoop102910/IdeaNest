@@ -106,9 +106,9 @@ export const fetchUser = async id => {
   try {
     const user = await User.findOne({
       where: { id },
-      attributes: ["id", "username", "email", "bio", "gender", "contact"],
+      attributes: ["id", "username", "email", "bio", "gender", "contact","role"],
     });
-    return user;
+    return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.log(error);
     throw error;

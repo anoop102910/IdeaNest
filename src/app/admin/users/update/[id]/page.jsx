@@ -3,7 +3,7 @@ import { fetchUser } from "@/lib/data";
 
 async function NewUser({ params }) {
   const user = await fetchUser(params.id);
-  console.log(user);
+
   return (
     <div className="flex justify-between items-center w-full ">
       <div className="w-full  mx-auto max-w-lg p-4  rounded-lg shadow sm:p-6 ">
@@ -29,11 +29,12 @@ async function NewUser({ params }) {
               Role
             </label>
             <select
-              className="bg-transparent border bg-black border-slate-300 text-slate-100  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-slate-400"
+              className="border bg-black border-slate-300 text-slate-100  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-slate-400"
               name="role"
               id=""
+              defaultValue={user.role}
             >
-              <option className="p-4 bg-green-400" value="">Select Role</option>
+              <option value="">Select Role</option>
               <option value="admin">Admin</option>
               <option value="user">User</option>
             </select>
